@@ -1,6 +1,6 @@
-# TerabhAI_TODO API
+# TODO API for front-end task
 
-This repository contains the backend for the TerabhAI_TODO API. The API provides functionality for managing tasks with user authentication.
+This repository contains the backend for the TODO API. The API provides functionality for managing tasks with user authentication.
 
 ## Setup Instructions
 
@@ -25,18 +25,13 @@ This repository contains the backend for the TerabhAI_TODO API. The API provides
    pip install -r requirements.txt
    ```
 
-3. **Environment Variables:**
-
-   - Obtain the `.env` file (shared via email) and place it in the root directory.
-   - Update the `.env` file with your Supabase URL and key.
-
-4. **Run the Server:**
+3. **Run the Server:**
 
    ```bash
    python main.py
    ```
 
-5. **Access API Documentation:**
+4. **Access API Documentation:**
    - Once the server is running, access the API documentation at `http://127.0.0.1:8000/docs`.
 
 ## API Routes
@@ -56,4 +51,4 @@ This repository contains the backend for the TerabhAI_TODO API. The API provides
 - **Mark Task as Done:** `PUT /done_task`
   - Marks a task as complete for the authenticated user.
 
-Use the provided credentials for testing the functionality of the TerabhAI_TODO API.
+Use the provided credentials for testing the functionality of the TODO API.

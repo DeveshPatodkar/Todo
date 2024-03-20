@@ -52,6 +52,12 @@ def login(request: User):
     return supabase_client.auth.get_session().access_token
 
 
+@app.post("/signout")
+def signout():
+    supabase_client.auth.sign_out()
+    return "Signout Successful"
+
+
 def userFromToken(token):
     data = supabase_client.auth.get_user(token).model_dump()["user"]
     return data
