@@ -4,13 +4,15 @@ import { FaTrash } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
 import { FaCircleArrowUp } from "react-icons/fa6";
 import { Button } from 'react-bootstrap';
-
+import { useMediaQuery } from '@mui/material';
 
 const Tasks = () => {
     const [task, setTask] = useState("");
     const [tasks, setTasks] = useState([]);
     const [showCompletedTasks, setShowCompletedTasks] = useState(false);
-    // Function to handle opening and closing of modal
+
+    const matches = useMediaQuery('(max-width: 1280px)')
+
     const handleShowCompletedTasks = () => {
         setShowCompletedTasks(!showCompletedTasks);
     };
@@ -86,17 +88,26 @@ const Tasks = () => {
                 <div style={{ marginBottom: '40px', border: '3px solid white', width: '258px', height: '126px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <div style={{ justifyContent: 'center', alignItems: 'center', width: '236px', height: '104px', color: 'white', fontWeight: '400', border: ' 3px solid #FFFCFC', fontSize: '60px', display: 'flex' }}>Tasks</div>
                 </div>
-                <Button onClick={handleShowCompletedTasks} style={{ border: 'white 2px solid', backgroundColor: 'transparent', color: 'white', marginBottom: '5px' }}>Show Completed Tasks</Button>
+                <Button onClick={handleShowCompletedTasks} style={{ border: 'white 2px solid', backgroundColor: 'transparent', color: 'white', marginBottom: '5px' }}>{!showCompletedTasks ? "Show Completed Tasks" : "show all tasks"}</Button>
             </div>
             <div style={{ border: '3px solid white', width: '80%', height: '70%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
                 <div style={{ display: 'flex', flexDirection: 'row', border: '3px solid white', width: '97%', height: '95%', position: 'relative', justifyContent: 'center' }}>
+
                     {!showCompletedTasks ? (
-                        <ol style={{ listStyleType: 'none', padding: 0, color: 'white', width: '91%', marginRight: '10px' }}>
+                        <ol style={{ listStyleType: 'none', padding: 0, color: 'white', width: '91%', marginRight: '10px', height: '80%', overflow: 'auto', scrollbarWidth: 'none' }}>
                             {tasks.map((task, index) => (
                                 <li key={task.id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '35px', fontWeight: '400', marginBottom: '10px' }}>
-                                    <div style={{ wordWrap: 'break-word' }}>
-                                        <span style={{ fontWeight: '700' }}>{`task ${index + 1} :`}</span> {task.task}{" "}
+                                    <span style={{ fontWeight: '700' }}>{`task ${index + 1} : `}</span>
+                                    <div style={{
+                                        width: matches ? '50%' : '75%',
+                                        overflowWrap: 'break-word',
+                                        textAlign: 'justify',
+
+                                    }}>
+                                        {task.task}{" "}
                                     </div>
+
+
                                     <div>
                                         <FaCheck style={{ marginLeft: '10px', cursor: 'pointer', marginRight: '20px', color: task.is_complete ? 'blue' : 'white' }} onClick={() => handleMarkAsDone(task.id)} />
                                         <FaTrash style={{ marginLeft: '10px', cursor: 'pointer' }} onClick={() => handleDeleteTask(task.id)} />
@@ -105,11 +116,17 @@ const Tasks = () => {
                             ))}
                         </ol>
                     ) : (
-                        <ol style={{ listStyleType: 'none', padding: 0, color: 'white', width: '91%', marginRight: '10px' }}>
+                        <ol style={{ listStyleType: 'none', padding: 0, color: 'white', width: '91%', marginRight: '10px', height: '90%', overflow: 'auto', scrollbarWidth: 'none' }}>
                             {tasks.filter(task => task.is_complete).map((task, index) => (
                                 <li key={task.id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '35px', fontWeight: '400', marginBottom: '10px' }}>
-                                    <div style={{ wordWrap: 'break-word' }}>
-                                        <span style={{ fontWeight: '700' }}>{`task ${index + 1} :`}</span> {task.task}{" "}
+                                    <span style={{ fontWeight: '700', }}>{`task ${index + 1} :`}</span>
+                                    <div style={{
+                                        width: matches ? '60%' : '75%',
+                                        overflowWrap: 'break-word',
+                                        textAlign: 'justify',
+
+                                    }}>
+                                        {task.task}{" "}
                                     </div>
                                     <div>
                                         <FaTrash style={{ marginLeft: '10px', cursor: 'pointer' }} onClick={() => handleDeleteTask(task.id)} />
@@ -120,7 +137,7 @@ const Tasks = () => {
                     )}
 
 
-                    <div style={{ display: 'flex', position: 'absolute', bottom: '10px', width: '100%', backgroundColor: 'transparent', padding: 10, alignItems: 'center' }}>
+                    <div style={{ display: !showCompletedTasks ? 'flex' : 'none', position: 'absolute', bottom: '10px', width: '100%', backgroundColor: 'transparent', padding: 10, alignItems: 'center', }}>
                         <input
                             type="text"
                             placeholder="Enter new task here ..."
@@ -136,7 +153,7 @@ const Tasks = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 
 };
