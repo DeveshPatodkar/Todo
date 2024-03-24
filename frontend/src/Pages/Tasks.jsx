@@ -5,12 +5,15 @@ import { FaCheck } from "react-icons/fa6";
 import { FaCircleArrowUp } from "react-icons/fa6";
 import { Button } from 'react-bootstrap';
 import { useMediaQuery } from '@mui/material';
+import { FaArrowLeftLong } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
+
 
 const Tasks = () => {
     const [task, setTask] = useState("");
     const [tasks, setTasks] = useState([]);
     const [showCompletedTasks, setShowCompletedTasks] = useState(false);
-
+    const navigate = useNavigate();
     const matches = useMediaQuery('(max-width: 1280px)')
 
     const handleShowCompletedTasks = () => {
@@ -81,15 +84,21 @@ const Tasks = () => {
         }
     };
 
+    const handleLogout = () => {
+        navigate("/");
+    }
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-            <div style={{ diplay: 'flex', flexDirection: 'column' }}>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <FaArrowLeftLong onClick={handleLogout} style={{ color: 'white', height: '70px', width: '70px', position: 'absolute', left: matches ? 70 : 140, top: 50, cursor: 'pointer' }} />
 
                 <div style={{ marginBottom: '30px', border: '3px solid white', width: '258px', height: '126px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <div style={{ justifyContent: 'center', alignItems: 'center', width: '236px', height: '104px', color: 'white', fontWeight: '400', border: ' 3px solid #FFFCFC', fontSize: '60px', display: 'flex' }}>Tasks</div>
                 </div>
-                <Button onClick={handleShowCompletedTasks} style={{ border: 'white 2px solid', backgroundColor: 'transparent', color: 'white', marginBottom: '10px', fontWeight: "700", fontSize: '12px', cursor: 'pointer' }}>{!showCompletedTasks ? "Show Completed Tasks" : "show all tasks"}</Button>
+                {/* <div style={{ width: '10px', height: '10px', backgroundColor: 'white' }}></div> */}
             </div>
+            <Button onClick={handleShowCompletedTasks} style={{ border: 'white 2px solid', backgroundColor: 'transparent', color: 'white', marginBottom: '10px', fontWeight: "700", fontSize: '12px', cursor: 'pointer' }}>{!showCompletedTasks ? "Show Completed Tasks" : "show all tasks"}</Button>
             <div style={{ border: '3px solid white', width: '80%', height: '70%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
                 <div style={{ display: 'flex', flexDirection: 'row', border: '3px solid white', width: '97%', height: '95%', position: 'relative', justifyContent: 'center' }}>
 
