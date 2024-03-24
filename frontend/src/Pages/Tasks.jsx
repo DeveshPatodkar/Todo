@@ -85,10 +85,10 @@ const Tasks = () => {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
             <div style={{ diplay: 'flex', flexDirection: 'column' }}>
 
-                <div style={{ marginBottom: '40px', border: '3px solid white', width: '258px', height: '126px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div style={{ marginBottom: '30px', border: '3px solid white', width: '258px', height: '126px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <div style={{ justifyContent: 'center', alignItems: 'center', width: '236px', height: '104px', color: 'white', fontWeight: '400', border: ' 3px solid #FFFCFC', fontSize: '60px', display: 'flex' }}>Tasks</div>
                 </div>
-                <Button onClick={handleShowCompletedTasks} style={{ border: 'white 2px solid', backgroundColor: 'transparent', color: 'white', marginBottom: '5px' }}>{!showCompletedTasks ? "Show Completed Tasks" : "show all tasks"}</Button>
+                <Button onClick={handleShowCompletedTasks} style={{ border: 'white 2px solid', backgroundColor: 'transparent', color: 'white', marginBottom: '10px', fontWeight: "700", fontSize: '12px', cursor: 'pointer' }}>{!showCompletedTasks ? "Show Completed Tasks" : "show all tasks"}</Button>
             </div>
             <div style={{ border: '3px solid white', width: '80%', height: '70%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
                 <div style={{ display: 'flex', flexDirection: 'row', border: '3px solid white', width: '97%', height: '95%', position: 'relative', justifyContent: 'center' }}>
@@ -96,10 +96,10 @@ const Tasks = () => {
                     {!showCompletedTasks ? (
                         <ol style={{ listStyleType: 'none', padding: 0, color: 'white', width: '91%', marginRight: '10px', height: '80%', overflow: 'auto', scrollbarWidth: 'none' }}>
                             {tasks.map((task, index) => (
-                                <li key={task.id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '35px', fontWeight: '400', marginBottom: '10px' }}>
+                                <li key={task.id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: !matches ? '35px' : '30px', fontWeight: '400', marginBottom: '10px' }}>
                                     <span style={{ fontWeight: '700' }}>{`task ${index + 1} : `}</span>
                                     <div style={{
-                                        width: matches ? '50%' : '75%',
+                                        width: matches ? '60%' : '75%',
                                         overflowWrap: 'break-word',
                                         textAlign: 'justify',
 
@@ -118,10 +118,10 @@ const Tasks = () => {
                     ) : (
                         <ol style={{ listStyleType: 'none', padding: 0, color: 'white', width: '91%', marginRight: '10px', height: '90%', overflow: 'auto', scrollbarWidth: 'none' }}>
                             {tasks.filter(task => task.is_complete).map((task, index) => (
-                                <li key={task.id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '35px', fontWeight: '400', marginBottom: '10px' }}>
+                                <li key={task.id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '35px', fontWeight: '400', marginBottom: '10px', fontSize: !matches ? '35px' : '30px' }}>
                                     <span style={{ fontWeight: '700', }}>{`task ${index + 1} :`}</span>
                                     <div style={{
-                                        width: matches ? '60%' : '75%',
+                                        width: matches ? '65%' : '75%',
                                         overflowWrap: 'break-word',
                                         textAlign: 'justify',
 

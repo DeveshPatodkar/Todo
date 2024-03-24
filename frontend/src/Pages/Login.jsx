@@ -5,7 +5,12 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showSignUpForm, setShowSignUpForm] = useState(false)
     const navigate = useNavigate();
+
+    const handleShowSignup = () => {
+        setShowSignUpForm(!showSignUpForm);
+    }
 
     const handleLogin = async () => {
         try {
@@ -17,12 +22,14 @@ const Login = () => {
             localStorage.setItem("token", response.data);
             navigate("/tasks");
         } catch (error) {
+            alert('invalid Login Credentials');
             console.error("Login Error:", error);
         }
     };
 
     const handleSignup = async () => {
         try {
+
             const response = await axios.post("http://localhost:8000/signup", {
                 email,
                 password,
@@ -30,6 +37,7 @@ const Login = () => {
             localStorage.setItem("token", response.data);
             navigate("/tasks");
         } catch (error) {
+            alert("Invalid Email or Password(atleast 6 characters)! If you have already signed Up try Logging in")
             console.error("Signup Error:", error);
         }
     };
@@ -53,7 +61,7 @@ const Login = () => {
                         />
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '3rem' }}>
-                        <label htmlFor="password" style={{ marginRight: '0.5rem', color: 'white', fontSize: '35px', alignSelf: 'flex-end', width: '150px', textAlign: 'end' }}>Password:</label>
+                        <label htmlFor="password" style={{ marginRight: '0.5rem', color: 'white', fontSize: '30px', alignSelf: 'flex-end', width: '150px', textAlign: 'end' }}>{'Password:'}</label>
                         <input
                             id="password"
                             type="password"
@@ -63,9 +71,9 @@ const Login = () => {
                             style={{ borderTopWidth: 0, borderLeftWidth: 0, borderRightWidth: 0, borderBottom: '3px solid white', padding: '0.5rem', width: '200px', backgroundColor: 'transparent', color: 'white' }}
                         />
                     </div>
-                    <button onClick={handleLogin} style={{ color: 'white', fontWeight: '500', fontSize: '35px', backgroundColor: 'transparent', borderWidth: 0 }}>Login</button>
+                    <button onClick={!showSignUpForm ? handleLogin : handleSignup} style={{ color: 'white', fontWeight: '500', fontSize: '35px', backgroundColor: 'transparent', borderWidth: 0, cursor: 'pointer' }}>{!showSignUpForm ? 'Login' : 'SignUp'}</button>
                     <div style={{ position: 'absolute', bottom: '10px', right: '10px' }}>
-                        <button onClick={handleSignup} style={{ color: 'white', fontWeight: '600', fontSize: '20px', backgroundColor: 'transparent', borderWidth: 0 }}>new user? sign up</button>
+                        <button onClick={handleShowSignup} style={{ color: 'white', fontWeight: '600', fontSize: '20px', backgroundColor: 'transparent', borderWidth: 0, cursor: 'pointer' }}>{!showSignUpForm ? 'new user? sign up' : 'Login'}</button>
                     </div>
                 </div>
             </div>
